@@ -6,10 +6,12 @@ export const AuthContext = createContext();
 
 function Auth ({ children }) {
   const [user, setUser] = useState(null);
+  const [checkedAuthState, setCheckedAuthState] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
+      setCheckedAuthState(true);
     });
   }, []);
 
@@ -27,7 +29,7 @@ function Auth ({ children }) {
       handleLogin,
       handleLogout,
       user,
-      setUser
+      checkedAuthState
     }}
     >
       {children}
