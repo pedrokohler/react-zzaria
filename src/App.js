@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, LinearProgress } from '@material-ui/core';
 
-import MainPage from 'pages/main';
-import LoginPage from 'pages/login';
+const MainPage = lazy(() => import('pages/main'));
+const LoginPage = lazy(() => import('pages/login'));
 
 const App = () => (
   <>
     <CssBaseline />
 
     <BrowserRouter>
-      <Switch>
-        <Route path='/login' component={LoginPage} />
-        <Route component={MainPage} />
-      </Switch>
+      <Suspense fallback={<LinearProgress />}>
+        <Switch>
+          <Route path='/login' component={LoginPage} />
+          <Route component={MainPage} />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   </>
 );
