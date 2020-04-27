@@ -17,14 +17,12 @@ const App = ({ location }) => {
     return <LinearProgress />;
   }
 
-  if (user) {
-    if (location.pathname === '/login') {
-      return <Redirect to='/' />;
-    }
-  } else {
-    if (location.pathname !== '/login') {
-      return <Redirect to='/login' />;
-    }
+  if (user && location.pathname === '/login') {
+    return <Redirect to='/' />;
+  }
+
+  if (!user && location.pathname !== '/login') {
+    return <Redirect to='/login' />;
   }
 
   return (
