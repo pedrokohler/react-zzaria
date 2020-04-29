@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
   Card,
   CardActionArea as MaterialCardActionArea,
-  Divider as MaterialDivider,
   Grid,
   Typography
 } from '@material-ui/core';
@@ -16,6 +15,7 @@ import pizzaSizes from 'mocks/pizza-sizes';
 import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
+import Divider from 'components/divider';
 
 const ChoosePizzaSize = () => {
   const { user } = useContext(AuthContext);
@@ -121,11 +121,6 @@ const CardActionArea = styled(MaterialCardActionArea).attrs({
   align-items: center;
 
   padding: 20px 0;
-`;
-
-const Divider = styled(MaterialDivider)`
-  margin: 20px 0;
-  width: 100%;
 `;
 
 export default ChoosePizzaSize;
