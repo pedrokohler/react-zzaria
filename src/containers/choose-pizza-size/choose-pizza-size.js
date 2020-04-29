@@ -14,6 +14,7 @@ import singularOrPlural from 'utils/singularOrPlural';
 import pizzaSizes from 'mocks/pizza-sizes';
 import { AuthContext } from 'contexts/auth';
 import Title from 'components/title';
+import Header from 'components/content-header';
 
 const ChoosePizzaSize = () => {
   const { user } = useContext(AuthContext);
@@ -21,14 +22,14 @@ const ChoosePizzaSize = () => {
 
   return (
     <>
-      <Grid container direction='column' alignItems='center'>
+      <Header>
         <Title variant='h3'>
           O que vai ser hoje, {firstName}?
         </Title>
         <Title variant='h4'>
           Escolha o tamanho da pizza:
         </Title>
-      </Grid>
+      </Header>
       <PizzasGrid>
         {pizzaSizes.map((size) => (
           <Grid item key={size.id} xs>
