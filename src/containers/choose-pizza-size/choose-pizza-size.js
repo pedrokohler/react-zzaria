@@ -10,10 +10,10 @@ import {
 } from '@material-ui/core';
 
 import { FLAVOURS_PAGE } from 'routes';
-
+import singularOrPlural from 'utils/singularOrPlural';
 import pizzaSizes from 'mocks/pizza-sizes';
-
 import { AuthContext } from 'contexts/auth';
+import Title from 'components/title';
 
 const ChoosePizzaSize = () => {
   const { user } = useContext(AuthContext);
@@ -56,13 +56,6 @@ const ChoosePizzaSize = () => {
     </>
   );
 };
-
-const singularOrPlural = (amount, singular, plural) => amount === 1 ? singular : plural;
-
-const Title = styled(Typography).attrs({
-  gutterBottom: true,
-  align: 'center'
-})``;
 
 const PizzasGrid = styled(Grid).attrs({
   container: true,

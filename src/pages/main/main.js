@@ -4,10 +4,10 @@ import { Route, Switch } from 'react-router-dom';
 import { LinearProgress } from '@material-ui/core';
 import { HOME_PAGE, FLAVOURS_PAGE } from 'routes';
 
-import Header from 'components/header';
+import Header from 'containers/header';
 
-const ChoosePizzaSize = lazy(() => import('components/choose-pizza-size'));
-const ChoosePizzaFlavour = lazy(() => import('components/choose-pizza-flavour'));
+const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
+const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
 
 const Main = () => (
   <>
