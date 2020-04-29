@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
+  Card,
+  CardActionArea as MaterialCardActionArea,
   Divider as MaterialDivider,
   Grid,
-  Paper,
   Typography
 } from '@material-ui/core';
 
@@ -28,18 +30,24 @@ const ChoosePizzaSize = () => {
       <PizzasGrid>
         {pizzaSizes.map((size) => (
           <Grid item key={size.id} xs>
-            <PaperPizza>
-              <Pizza>
-                <PizzaText>{size.size}cm</PizzaText>
-              </Pizza>
-              <Divider />
-              <Typography>{size.name}</Typography>
-              <Typography>
-                {size.slices} fatias,{' '}
-                {size.flavours}{' '}
-                {singularOrPlural(size.flavours, 'sabor', 'sabores')}
-              </Typography>
-            </PaperPizza>
+            <Card>
+              <CardActionArea to={{
+                pathname: '/sabores',
+                state: size
+              }}
+              >
+                <Pizza>
+                  <PizzaText>{size.size}cm</PizzaText>
+                </Pizza>
+                <Divider />
+                <Typography>{size.name}</Typography>
+                <Typography>
+                  {size.slices} fatias,{' '}
+                  {size.flavours}{' '}
+                  {singularOrPlural(size.flavours, 'sabor', 'sabores')}
+                </Typography>
+              </CardActionArea>
+            </Card>
           </Grid>
         ))}
       </PizzasGrid>
@@ -56,7 +64,7 @@ const Title = styled(Typography).attrs({
 
 const PizzasGrid = styled(Grid).attrs({
   container: true,
-  spacing: 4
+  spacing: 2
 })`
   padding: 20px;
 `;
@@ -82,11 +90,14 @@ const Pizza = styled.div`
   height: 200px;
   width: 200px;
 
+  background: #fff;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   position: relative;
+  z-index: 1;
 
   border: 1px solid #ccc;
   border-radius: 50%;
@@ -110,7 +121,9 @@ const Pizza = styled.div`
   }
 `;
 
-const PaperPizza = styled(Paper)`
+const CardActionArea = styled(MaterialCardActionArea).attrs({
+  component: Link
+})`
   min-width: 250px;
 
   display: flex;

@@ -6,6 +6,7 @@ import { LinearProgress } from '@material-ui/core';
 import Header from 'components/header';
 
 const ChoosePizzaSize = lazy(() => import('components/choose-pizza-size'));
+const ChoosePizzaFlavour = lazy(() => import('components/choose-pizza-flavour'));
 
 const Main = () => (
   <>
@@ -15,6 +16,7 @@ const Main = () => (
       <Suspense fallback={<LinearProgress />}>
         <Switch>
           <Route path='/' exact component={ChoosePizzaSize} />
+          <Route path='/sabores' component={ChoosePizzaFlavour} />
         </Switch>
       </Suspense>
     </Content>
