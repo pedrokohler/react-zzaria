@@ -10,11 +10,12 @@ import {
 } from '@material-ui/core';
 
 import { FLAVOURS_PAGE } from 'routes';
+import { AuthContext } from 'contexts/auth';
 import singularOrPlural from 'utils/singularOrPlural';
 import pizzaSizes from 'mocks/pizza-sizes';
-import { AuthContext } from 'contexts/auth';
 import Title from 'components/title';
 import Header from 'components/content-header';
+import PizzasGrid from 'components/pizzas-grid';
 
 const ChoosePizzaSize = () => {
   const { user } = useContext(AuthContext);
@@ -57,13 +58,6 @@ const ChoosePizzaSize = () => {
     </>
   );
 };
-
-const PizzasGrid = styled(Grid).attrs({
-  container: true,
-  spacing: 2
-})`
-  padding: 20px;
-`;
 
 const PizzaText = styled(Typography).attrs({
   variant: 'h5'
