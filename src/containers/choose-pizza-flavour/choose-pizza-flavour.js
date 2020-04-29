@@ -13,7 +13,7 @@ import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
-import singularOrPlural from 'utils/singularOrPlural';
+import { singularOrPlural, toMoney } from 'utils';
 import CardLink from 'components/card-link';
 
 import pizzaFlavours from 'mocks/pizza-flavours';
@@ -65,7 +65,8 @@ const ChoosePizzaFlavour = ({ location }) => {
                 <Img src={flavour.image} alt={flavour.name} />
                 <Divider />
                 <Typography>{flavour.name}</Typography>
-                <Typography variant='h5'>{flavour.value[sizeId]}</Typography>
+                <Typography variant='h5'>{toMoney(flavour.value[sizeId])}
+                </Typography>
               </Label>
             </Card>
           </Grid>
