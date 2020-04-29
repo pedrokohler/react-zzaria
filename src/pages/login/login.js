@@ -29,7 +29,7 @@ const GridContainer = styled(Grid).attrs({
   container: true,
   direction: 'row',
   justify: 'center',
-  spacing: 10
+  spacing: 5
 })``;
 
 const GitHubButton = styled(Button).attrs({
