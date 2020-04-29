@@ -10,7 +10,12 @@ function Auth ({ children }) {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      setUser(user);
+      if (user) {
+        const firstName = user.displayName.split(' ')[0];
+        setUser({ ...user, firstName });
+      } else {
+        setUser(null);
+      }
       setCheckedAuthState(true);
     });
   }, []);
