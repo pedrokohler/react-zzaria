@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import {
   Card,
-  CardActionArea as MaterialCardActionArea,
   Grid,
   Typography
 } from '@material-ui/core';
@@ -16,6 +14,7 @@ import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
+import CardLink from 'components/card-link';
 
 const ChoosePizzaSize = () => {
   const { user } = useContext(AuthContext);
@@ -35,7 +34,7 @@ const ChoosePizzaSize = () => {
         {pizzaSizes.map((size) => (
           <Grid item key={size.id} xs>
             <Card>
-              <CardActionArea to={{
+              <CardLink to={{
                 pathname: FLAVOURS_PAGE,
                 state: size
               }}
@@ -50,7 +49,7 @@ const ChoosePizzaSize = () => {
                   {size.flavours}{' '}
                   {singularOrPlural(size.flavours, 'sabor', 'sabores')}
                 </Typography>
-              </CardActionArea>
+              </CardLink>
             </Card>
           </Grid>
         ))}
@@ -109,18 +108,6 @@ const Pizza = styled.div`
     width: 1px;
     height: 160px;
   }
-`;
-
-const CardActionArea = styled(MaterialCardActionArea).attrs({
-  component: Link
-})`
-  min-width: 250px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 20px 0;
 `;
 
 export default ChoosePizzaSize;
