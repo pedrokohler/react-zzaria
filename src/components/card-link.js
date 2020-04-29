@@ -11,7 +11,7 @@ const CardLink = styled(CardActionArea).attrs({
   flex-direction: column;
   align-items: center;
 
-  padding: 20px 0;
+  padding: ${({ theme }) => theme.spacing(3, 0)};
 `;
 
 export default CardLink;

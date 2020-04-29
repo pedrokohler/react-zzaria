@@ -25,7 +25,7 @@ const Main = () => (
 );
 
 const Content = styled.main`
-  padding: 100px 20px 20px;
+  padding: ${({ theme }) => theme.spacing(12, 3, 3)};
 `;
 
 export default Main;

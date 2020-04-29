@@ -71,7 +71,7 @@ const PizzaText = styled(Typography).attrs({
   position: relative;
   z-index: 1;
 
-  background: #fff;
+  background: ${({ theme }) => theme.palette.common.white};
   border-radius: 50%;
 `;
 
@@ -79,7 +79,7 @@ const Pizza = styled.div`
   height: 200px;
   width: 200px;
 
-  background: #fff;
+  background: ${({ theme }) => theme.palette.common.white};
 
   display: flex;
   justify-content: center;
@@ -88,12 +88,12 @@ const Pizza = styled.div`
   position: relative;
   z-index: 1;
 
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.palette.grey.A100};
   border-radius: 50%;
 
   &::before,
   &::after {
-    background: #ccc;
+    background: ${({ theme }) => theme.palette.grey.A100};
     content: '';
     position: absolute;
     transform: rotate(45deg);

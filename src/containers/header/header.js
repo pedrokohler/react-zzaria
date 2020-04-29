@@ -56,17 +56,17 @@ const LogoContainer = styled.div`
 const Logo = styled(MainLogo)`
   width: 200px;
   & path {
-    fill: #fff;
+    fill: ${({ theme }) => theme.palette.common.white};
   }
   & line{
-    stroke: #fff;
+    stroke: ${({ theme }) => theme.palette.common.white};
   }
 `;
 
 const Toolbar = styled(MaterialToolbar)`
   margin: 0 auto;
   width: 100%;
-  max-width: 960px;
+  max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
 `;
 
 export default Header;
