@@ -4,6 +4,7 @@ import { LinearProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { AuthContext } from 'contexts/auth';
+import { HOME_PAGE, LOGIN_PAGE } from 'routes';
 
 const MainPage = lazy(() => import('pages/main'));
 const LoginPage = lazy(() => import('pages/login'));
@@ -17,18 +18,18 @@ const App = ({ location }) => {
     return <LinearProgress />;
   }
 
-  if (user && location.pathname === '/login') {
-    return <Redirect to='/' />;
+  if (user && location.pathname === LOGIN_PAGE) {
+    return <Redirect to={HOME_PAGE} />;
   }
 
-  if (!user && location.pathname !== '/login') {
-    return <Redirect to='/login' />;
+  if (!user && location.pathname !== LOGIN_PAGE) {
+    return <Redirect to={LOGIN_PAGE} />;
   }
 
   return (
     <Suspense fallback={<LinearProgress />}>
       <Switch>
-        <Route path='/login' component={LoginPage} />
+        <Route path={LOGIN_PAGE} component={LoginPage} />
         <Route component={MainPage} />
       </Switch>
     </Suspense>

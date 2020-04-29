@@ -9,6 +9,8 @@ import {
   Typography
 } from '@material-ui/core';
 
+import { FLAVOURS_PAGE } from 'routes';
+
 import pizzaSizes from 'mocks/pizza-sizes';
 
 import { AuthContext } from 'contexts/auth';
@@ -32,7 +34,7 @@ const ChoosePizzaSize = () => {
           <Grid item key={size.id} xs>
             <Card>
               <CardActionArea to={{
-                pathname: '/sabores',
+                pathname: FLAVOURS_PAGE,
                 state: size
               }}
               >
