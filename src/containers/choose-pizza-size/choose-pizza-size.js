@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   Card,
@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core';
 
 import { FLAVOURS_PAGE } from 'routes';
-import { AuthContext } from 'contexts/auth';
 import singularOrPlural from 'utils/singularOrPlural';
 import pizzaSizes from 'mocks/pizza-sizes';
 import Title from 'components/title';
@@ -15,9 +14,10 @@ import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
 import CardLink from 'components/card-link';
+import { useAuth } from 'hooks';
 
 const ChoosePizzaSize = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const firstName = user.firstName;
 
   return (

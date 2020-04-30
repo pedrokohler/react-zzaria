@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext } from 'react';
+import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
@@ -6,14 +6,14 @@ import { LinearProgress, Container, Grid, Typography } from '@material-ui/core';
 import { HOME_PAGE, FLAVOURS_PAGE } from 'routes';
 
 import Header from 'containers/header';
-import { AuthContext } from 'contexts/auth';
+import { useAuth } from 'hooks';
 import { singularOrPlural } from 'utils';
 
 const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
 const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
 
 const Main = ({ location }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   let name, slices, flavours;
   if (location.state) {
     ({ name, slices, flavours } = location.state);

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import {
   AppBar,
@@ -11,10 +11,10 @@ import {
 import { AccountCircle } from '@material-ui/icons';
 
 import { ReactComponent as MainLogo } from 'images/logo-react-zzaria.svg';
-import { AuthContext } from 'contexts/auth';
+import { useAuth } from 'hooks';
 
 const Header = () => {
-  const { handleLogout, user } = useContext(AuthContext);
+  const { handleLogout, user } = useAuth();
   const [anchorElement, setAnchorElement] = useState(null);
   const firstName = user.firstName;
 
