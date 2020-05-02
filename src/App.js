@@ -4,7 +4,7 @@ import { LinearProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { useAuth } from 'hooks';
-import { HOME_PAGE, LOGIN_PAGE } from 'routes';
+import { SIZE_PAGE, LOGIN_PAGE } from 'routes';
 
 const MainPage = lazy(() => import('pages/main'));
 const LoginPage = lazy(() => import('pages/login'));
@@ -19,7 +19,7 @@ const App = ({ location }) => {
   }
 
   if (user && location.pathname === LOGIN_PAGE) {
-    return <Redirect to={HOME_PAGE} />;
+    return <Redirect to={SIZE_PAGE} />;
   }
 
   if (!user && location.pathname !== LOGIN_PAGE) {

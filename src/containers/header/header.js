@@ -9,9 +9,11 @@ import {
   Typography
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 import { ReactComponent as MainLogo } from 'images/logo-react-zzaria.svg';
 import { useAuth } from 'hooks';
+import { SIZE_PAGE } from 'routes';
 
 const Header = () => {
   const { handleLogout, user } = useAuth();
@@ -30,7 +32,9 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <LogoContainer>
-          <Logo />
+          <LogoLink to={SIZE_PAGE}>
+            <Logo />
+          </LogoLink>
         </LogoContainer>
         <Typography align='center'>Hey, {firstName}</Typography>
 
@@ -51,6 +55,10 @@ const Header = () => {
 
 const LogoContainer = styled.div`
   flex-grow: 1;
+`;
+
+const LogoLink = styled(Link)`
+  display: inline-block;
 `;
 
 const Logo = styled(MainLogo)`

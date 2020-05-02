@@ -8,7 +8,7 @@ import {
   Typography
 } from '@material-ui/core';
 
-import { HOME_PAGE } from 'routes';
+import { SIZE_PAGE } from 'routes';
 import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
@@ -22,7 +22,7 @@ const ChoosePizzaFlavour = ({ location }) => {
   const [checkboxes, setCheckboxes] = useState({});
 
   if (!location.state) {
-    return <Redirect to={HOME_PAGE} />;
+    return <Redirect to={SIZE_PAGE} />;
   }
   const { flavours } = location.state;
   const { id: sizeId } = location.state;

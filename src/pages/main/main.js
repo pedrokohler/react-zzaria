@@ -1,9 +1,15 @@
 import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
-import { LinearProgress, Container, Grid, Typography } from '@material-ui/core';
-import { HOME_PAGE, FLAVOURS_PAGE } from 'routes';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import {
+  Button as MaterialButton,
+  Container,
+  Grid,
+  LinearProgress,
+  Typography
+} from '@material-ui/core';
+import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE } from 'routes';
 
 import Header from 'containers/header';
 import { useAuth } from 'hooks';
@@ -26,13 +32,14 @@ const Main = ({ location }) => {
       <Content>
         <Suspense fallback={<LinearProgress />}>
           <Switch>
-            <Route path={HOME_PAGE} exact component={ChoosePizzaSize} />
+            <Route path={SIZE_PAGE} exact component={ChoosePizzaSize} />
             <Route path={FLAVOURS_PAGE} component={ChoosePizzaFlavour} />
+            <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
       </Content>
 
-      {location.pathname !== HOME_PAGE && (
+      {location.pathname !== SIZE_PAGE && (
         <Footer>
           <Container>
             <Grid container>
@@ -45,7 +52,8 @@ const Main = ({ location }) => {
                 </Typography>
               </OrderContainer>
               <Grid item>
-                Botões
+                <Button to={SIZE_PAGE}>Voltar</Button>
+                <Button to={QUANTITY_PAGE} color='primary'>Avançar</Button>
               </Grid>
             </Grid>
           </Container>
@@ -58,6 +66,13 @@ const Main = ({ location }) => {
 Main.propTypes = {
   location: PropTypes.object.isRequired
 };
+
+const Button = styled(MaterialButton).attrs({
+  variant: 'contained',
+  component: Link
+})`
+  margin-left: ${({ theme }) => theme.spacing(2)}px;
+`;
 
 const OrderContainer = styled(Grid).attrs({
   item: true
