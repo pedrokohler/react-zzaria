@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import {
   Button as MaterialButton,
   Container,
@@ -9,12 +9,11 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { useAuth, usePizza } from 'hooks';
+import { useAuth } from 'hooks';
 import { singularOrPlural } from 'utils';
 import { SIZE_PAGE } from 'routes';
 
-const Footer = ({ nextPage, location, history }) => {
-  const { pizza } = usePizza();
+const Footer = ({ forwardButton, location, history }) => {
   const { user } = useAuth();
 
   if (!location.state) {
@@ -54,15 +53,9 @@ const Footer = ({ nextPage, location, history }) => {
           <ButtonContainer>
             <Button onClick={goBack}>Voltar</Button>
             <Button
-              component={Link}
-              to={{
-                pathname: nextPage,
-                state: pizza
-              }}
               color='primary'
-              disabled={pizza.selectedFlavours ? pizza.selectedFlavours.length === 0 : false}
-            >Avançar
-            </Button>
+              {...forwardButton}
+            />
           </ButtonContainer>
         </Grid>
       </Container>
@@ -71,7 +64,7 @@ const Footer = ({ nextPage, location, history }) => {
 };
 
 Footer.propTypes = {
-  nextPage: PropTypes.string.isRequired,
+  forwardButton: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
