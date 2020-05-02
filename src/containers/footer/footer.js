@@ -15,7 +15,13 @@ import { singularOrPlural } from 'utils';
 const Footer = ({ nextPage, location, history }) => {
   const { pizza } = usePizza();
   const { user } = useAuth();
-  const { name, slices, flavours } = location.state;
+  const { name, slices, flavours } = location.state.size;
+
+  const selectedFlavours = [
+    { id: '0', name: 'Calabresa' },
+    { id: '2', name: 'Prestígio' },
+    { id: '1', name: 'Frango com Catupiry' }
+  ];
 
   const goBack = e => {
     e.preventDefault();
@@ -33,9 +39,19 @@ const Footer = ({ nextPage, location, history }) => {
               ({slices} {singularOrPlural(slices, 'fatia', 'fatias')}, {' '}
               {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')})
             </Typography>
+            {selectedFlavours && (
+              <Typography>
+                {singularOrPlural(selectedFlavours.length, 'No sabor', 'Nos sabores')}{' '}
+                <b>{selectedFlavours
+                  .map(({ name }) => name)
+                  .join(', ')
+                  .replace(/, (.[^,]*)$/, ' e $1')}
+                </b>
+              </Typography>
+            )}
           </OrderContainer>
           <Grid item>
-            <Button onClick={goBack}>Voltar</Button>
+            <Button onClick={goBack} to='#'>Voltar</Button>
             <Button
               to={{
                 pathname: nextPage,
