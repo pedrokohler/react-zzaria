@@ -9,11 +9,11 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { useAuth } from 'hooks';
+import { useAuth, usePizza } from 'hooks';
 import { singularOrPlural } from 'utils';
-import { SIZE_PAGE, QUANTITY_PAGE } from 'routes';
 
 const Footer = ({ nextPage, location, history }) => {
+  const { pizza } = usePizza();
   const { user } = useAuth();
   const { name, slices, flavours } = location.state;
 
@@ -39,7 +39,7 @@ const Footer = ({ nextPage, location, history }) => {
             <Button
               to={{
                 pathname: nextPage,
-                state: location.state
+                state: pizza
               }}
               color='primary'
             >Avançar

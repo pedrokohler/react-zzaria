@@ -17,9 +17,11 @@ import { singularOrPlural, toMoney } from 'utils';
 import CardLink from 'components/card-link';
 
 import pizzaFlavours from 'mocks/pizza-flavours';
+import { usePizza } from 'hooks';
 
 const ChoosePizzaFlavour = ({ location }) => {
   const [checkboxes, setCheckboxes] = useState({});
+  const { pizza, setPizza } = usePizza();
 
   if (!location.state) {
     return <Redirect to={SIZE_PAGE} />;
@@ -38,6 +40,11 @@ const ChoosePizzaFlavour = ({ location }) => {
     const currentFlavours = countChecked();
 
     if (!newState || currentFlavours < maxFlavours) {
+      // const flavours = {
+      //   ...pizza.flavours,
+
+      // }
+      // setPizza({ ...pizza, flavours });
       setCheckboxes((checkboxes) => ({
         ...checkboxes,
         [id]: newState
