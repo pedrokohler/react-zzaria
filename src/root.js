@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 
 import AuthProvider from 'contexts/auth';
-import PizzaProvider from 'contexts/pizza';
 
 import App from 'app';
 
@@ -24,13 +23,11 @@ const Root = () => {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
-            <PizzaProvider>
-              <CssBaseline />
-              <GlobalStyle />
-              <BrowserRouter>
-                <Route component={App} />
-              </BrowserRouter>
-            </PizzaProvider>
+            <CssBaseline />
+            <GlobalStyle />
+            <BrowserRouter>
+              <Route component={App} />
+            </BrowserRouter>
           </AuthProvider>
         </ThemeProvider>
       </MuiThemeProvider>

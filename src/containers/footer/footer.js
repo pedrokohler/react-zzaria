@@ -15,13 +15,9 @@ import { singularOrPlural } from 'utils';
 const Footer = ({ nextPage, location, history }) => {
   const { pizza } = usePizza();
   const { user } = useAuth();
-  const { name, slices, flavours } = location.state.size;
 
-  const selectedFlavours = [
-    { id: '0', name: 'Calabresa' },
-    { id: '2', name: 'Prestígio' },
-    { id: '1', name: 'Frango com Catupiry' }
-  ];
+  const { selectedSize, selectedFlavours } = location.state;
+  const { name, slices, flavours } = selectedSize;
 
   const goBack = e => {
     e.preventDefault();

@@ -26,7 +26,7 @@ const ChoosePizzaFlavour = ({ location }) => {
   if (!location.state) {
     return <Redirect to={SIZE_PAGE} />;
   }
-  const { flavours, id: sizeId } = location.state.size;
+  const { flavours, id: sizeId } = location.state.selectedSize;
 
   const countChecked = () => Object
     .values(checkboxes)
@@ -46,15 +46,14 @@ const ChoosePizzaFlavour = ({ location }) => {
     const currentFlavours = countChecked();
 
     if (!newState || currentFlavours < maxFlavours) {
-      // const flavours = {
-      //   ...pizza.flavours,
-
-      // }
-      // setPizza({ ...pizza, flavours });
-      setCheckboxes((checkboxes) => ({
-        ...checkboxes,
-        [id]: newState
-      }));
+      setCheckboxes((checkboxes) => {
+        const newCheckboxes = {
+          ...checkboxes,
+          [id]: newState
+        };
+        setPizza({ ...pizza, selectedFlavours: getCheckedNames(newCheckboxes) });
+        return newCheckboxes;
+      });
     }
   };
 

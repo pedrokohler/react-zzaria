@@ -36,7 +36,7 @@ const ChoosePizzaSize = () => {
             <Card>
               <CardLink to={{
                 pathname: FLAVOURS_PAGE,
-                state: { size }
+                state: { selectedSize: size }
               }}
               >
                 <Pizza>
