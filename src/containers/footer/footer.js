@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 
 import { useAuth } from 'hooks';
 import { singularOrPlural } from 'utils';
-import { SIZE_PAGE, QUANTITY_PAGE } from 'routes';
 
 const Footer = ({ nextPage, location, history }) => {
   const { user } = useAuth();
+  const { name, slices, flavours } = location.state.size;
 
   const selectedFlavours = [
     { id: '0', name: 'Calabresa' },
