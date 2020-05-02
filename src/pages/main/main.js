@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import {
   LinearProgress
 } from '@material-ui/core';
-import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE } from 'routes';
+import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE } from 'routes';
 
 import Header from 'containers/header';
 import Footer from 'containers/footer';
@@ -44,7 +44,7 @@ const Main = () => (
           <Footer
             location={location}
             history={history}
-            nextPage={QUANTITY_PAGE}
+            nextPage={CHECKOUT_PAGE}
           />)}
       />
     </Switch>
