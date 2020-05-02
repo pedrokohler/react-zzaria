@@ -51,7 +51,7 @@ const Footer = ({ nextPage, location, history }) => {
               </Typography>
             )}
           </OrderContainer>
-          <Grid item>
+          <ButtonContainer>
             <Button onClick={goBack}>Voltar</Button>
             <Button
               component={Link}
@@ -63,7 +63,7 @@ const Footer = ({ nextPage, location, history }) => {
               disabled={pizza.selectedFlavours ? pizza.selectedFlavours.length === 0 : false}
             >Avançar
             </Button>
-          </Grid>
+          </ButtonContainer>
         </Grid>
       </Container>
     </FooterContainer>
@@ -75,6 +75,13 @@ Footer.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
+
+const ButtonContainer = styled(Grid).attrs({
+  item: true
+})`
+  display: flex;
+  align-items: center;
+`;
 
 const FooterContainer = styled.footer`
   box-shadow: 0 0 3px ${({ theme }) => theme.palette.grey[400]};
