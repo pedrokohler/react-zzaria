@@ -32,6 +32,13 @@ const ChoosePizzaFlavour = ({ location }) => {
     .filter(Boolean)
     .length;
 
+  const getCheckedNames = (checkboxes) => Object.entries(checkboxes)
+    .filter(([, value]) => !!value)
+    .map(([id]) => ({
+      id,
+      name: pizzaFlavours.find(flavour => flavour.id === id).name
+    }));
+
   const handleChangeCheckbox = (id) => (e) => {
     const newState = e.target.checked;
     const maxFlavours = flavours;
