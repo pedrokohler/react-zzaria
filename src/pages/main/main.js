@@ -39,7 +39,7 @@ const Main = ({ location }) => {
         </Suspense>
       </Content>
 
-      {location.pathname !== SIZE_PAGE && (
+      {location.state && (
         <Footer>
           <Container>
             <Grid container>
