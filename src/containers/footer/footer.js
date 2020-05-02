@@ -13,9 +13,14 @@ import { useAuth } from 'hooks';
 import { singularOrPlural } from 'utils';
 import { SIZE_PAGE, QUANTITY_PAGE } from 'routes';
 
-const Footer = ({ location }) => {
+const Footer = ({ nextPage, location, history }) => {
   const { user } = useAuth();
   const { name, slices, flavours } = location.state;
+
+  const goBack = e => {
+    e.preventDefault();
+    history.goBack();
+  };
 
   return (
     <FooterContainer>
@@ -30,14 +35,13 @@ const Footer = ({ location }) => {
             </Typography>
           </OrderContainer>
           <Grid item>
-            <Button to={SIZE_PAGE}>Voltar</Button>
+            <Button onClick={goBack}>Voltar</Button>
             <Button
               to={{
-                pathname: QUANTITY_PAGE,
-                state: {
-                  ...location.state
-                }
-              }} color='primary'
+                pathname: nextPage,
+                state: location.state
+              }}
+              color='primary'
             >Avançar
             </Button>
           </Grid>
@@ -48,7 +52,9 @@ const Footer = ({ location }) => {
 };
 
 Footer.propTypes = {
-  location: PropTypes.object.isRequired
+  nextPage: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const FooterContainer = styled.footer`

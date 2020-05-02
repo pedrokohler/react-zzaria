@@ -28,7 +28,26 @@ const Main = () => (
       </Suspense>
     </Content>
 
-    <Route path={`(${FLAVOURS_PAGE}|${QUANTITY_PAGE})`} component={Footer} />
+    <Switch>
+      <Route
+        path={FLAVOURS_PAGE}
+        render={({ location, history }) => (
+          <Footer
+            location={location}
+            history={history}
+            nextPage={QUANTITY_PAGE}
+          />)}
+      />
+      <Route
+        path={QUANTITY_PAGE}
+        render={({ location, history }) => (
+          <Footer
+            location={location}
+            history={history}
+            nextPage={QUANTITY_PAGE}
+          />)}
+      />
+    </Switch>
   </>
 );
 
