@@ -12,11 +12,14 @@ const ChoosePizzaQuantity = () => {
   const { pizza, setPizza } = usePizza();
   const [quantity, setQuantity] = useState(1);
 
+  const validateNumber = (value) => value > 0 && value <= 30 && Number.isInteger(Number(value));
+
   const handleChange = (e) => {
     const { value } = e.target;
-    if ((value > 0 && value <= 30) || value === '') {
-      setPizza({ ...pizza, quantity });
-      setQuantity(value);
+
+    if (validateNumber(value) || value === '') {
+      setPizza({ ...pizza, quantity: value });
+      setQuantity(value.trim());
     }
   };
 
@@ -40,10 +43,7 @@ const ChoosePizzaQuantity = () => {
   );
 };
 
-const Input = styled(MaterialInput).attrs({
-  type: 'number'
-})`
-
+const Input = styled(MaterialInput)`
   margin-bottom: ${({ theme }) => theme.spacing(3)}px;
 
   & input {
