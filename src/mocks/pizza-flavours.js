@@ -1,6 +1,6 @@
 const pizzaFlavours = [
   {
-    id: 0,
+    id: '0',
     image: '/mocks/images/pizza-calabresa.png',
     name: 'Calabresa',
     value: {
@@ -10,7 +10,7 @@ const pizzaFlavours = [
     }
   },
   {
-    id: 1,
+    id: '1',
     image: '/mocks/images/pizza-frango-catupiry.png',
     name: 'Frango com Catupiry',
     value: {
@@ -20,7 +20,7 @@ const pizzaFlavours = [
     }
   },
   {
-    id: 2,
+    id: '2',
     image: '/mocks/images/pizza-prestigio.jpg',
     name: 'Prestígio',
     value: {
