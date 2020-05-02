@@ -35,7 +35,7 @@ const Footer = ({ nextPage, location, history }) => {
             </Typography>
           </OrderContainer>
           <Grid item>
-            <Button onClick={goBack}>Voltar</Button>
+            <Button onClick={goBack} to='#'>Voltar</Button>
             <Button
               to={{
                 pathname: nextPage,
