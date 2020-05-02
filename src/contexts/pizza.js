@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 
 export const PizzaContext = createContext();
 
+const initialState = {
+  selectedSize: {},
+  selectedFlavours: []
+};
+
 function Pizza ({ children, location }) {
-  const [pizza, setPizza] = useState(location.state);
+  const [pizza, setPizza] = useState({ ...initialState, ...location.state });
 
   useEffect(() => {
-    setPizza(location.state);
+    setPizza((lastPizza) => ({ ...lastPizza, ...location.state }));
   }, [location]);
 
   return (

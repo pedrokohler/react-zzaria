@@ -26,6 +26,7 @@ const ChoosePizzaFlavour = ({ location }) => {
   if (!location.state) {
     return <Redirect to={SIZE_PAGE} />;
   }
+
   const { flavours, id: sizeId } = location.state.selectedSize;
 
   const countChecked = () => Object

@@ -60,6 +60,7 @@ const Footer = ({ nextPage, location, history }) => {
                 state: pizza
               }}
               color='primary'
+              disabled={pizza.selectedFlavours ? pizza.selectedFlavours.length === 0 : false}
             >Avançar
             </Button>
           </Grid>
