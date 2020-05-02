@@ -52,8 +52,9 @@ const Footer = ({ nextPage, location, history }) => {
             )}
           </OrderContainer>
           <Grid item>
-            <Button onClick={goBack} to='#'>Voltar</Button>
+            <Button onClick={goBack}>Voltar</Button>
             <Button
+              component={Link}
               to={{
                 pathname: nextPage,
                 state: pizza
@@ -87,8 +88,7 @@ const OrderContainer = styled(Grid).attrs({
 `;
 
 const Button = styled(MaterialButton).attrs({
-  variant: 'contained',
-  component: Link
+  variant: 'contained'
 })`
   margin-left: ${({ theme }) => theme.spacing(2)}px;
 `;
