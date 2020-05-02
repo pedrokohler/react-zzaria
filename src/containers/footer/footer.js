@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Button as MaterialButton,
   Container,
@@ -11,10 +11,15 @@ import PropTypes from 'prop-types';
 
 import { useAuth, usePizza } from 'hooks';
 import { singularOrPlural } from 'utils';
+import { SIZE_PAGE } from 'routes';
 
 const Footer = ({ nextPage, location, history }) => {
   const { pizza } = usePizza();
   const { user } = useAuth();
+
+  if (!location.state) {
+    return <Redirect to={SIZE_PAGE} />;
+  }
 
   const { selectedSize, selectedFlavours } = location.state;
   const { name, slices, flavours } = selectedSize;
