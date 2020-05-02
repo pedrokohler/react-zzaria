@@ -17,6 +17,7 @@ import { singularOrPlural } from 'utils';
 
 const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
 const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
+const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'));
 
 const Main = ({ location }) => {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ const Main = ({ location }) => {
           <Switch>
             <Route path={SIZE_PAGE} exact component={ChoosePizzaSize} />
             <Route path={FLAVOURS_PAGE} component={ChoosePizzaFlavour} />
+            <Route path={QUANTITY_PAGE} component={ChoosePizzaQuantity} />
             <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
