@@ -20,7 +20,7 @@ const Checkout = () => {
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
         <Title>Qual o endereço para entrega?</Title>
-        <PaperContainer>
+        <AddressPaperContainer>
           <Grid container spacing={1}>
             <TextField label='CEP' sm={5} autoFocus />
             <Grid item sm={7} />
@@ -30,7 +30,7 @@ const Checkout = () => {
             <TextField label='Cidade' sm={9} />
             <TextField label='Estado' sm={3} />
           </Grid>
-        </PaperContainer>
+        </AddressPaperContainer>
 
         <Title>Qual o seu telefone?</Title>
         <PaperContainer>
@@ -95,8 +95,11 @@ const Title = styled(MyTitle).attrs({
 
 const PaperContainer = styled(Paper)`
   flex-grow: 1;
-  margin-bottom: ${({ theme }) => theme.spacing(5)}px;
   padding: ${({ theme }) => theme.spacing(2)}px;
+`;
+
+const AddressPaperContainer = styled(PaperContainer)`
+  margin-bottom: ${({ theme }) => theme.spacing(1)}px;
 `;
 
 export default Checkout;
