@@ -8,7 +8,7 @@ import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE } from 'routes';
 
 import Header from 'containers/header';
 import Footer from 'containers/footer';
-import { usePizza } from 'hooks';
+import { usePizza, useOrder } from 'hooks';
 
 const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
 const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
@@ -16,6 +16,7 @@ const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'
 
 const Main = () => {
   const { pizza } = usePizza();
+  const { addPizzaToOrder } = useOrder();
   return (
     <>
       <Header />
@@ -62,6 +63,7 @@ const Main = () => {
                   state: pizza
                 },
                 component: Link,
+                onClick: () => addPizzaToOrder(pizza),
                 children: 'Finalizar compra'
               }}
             />
