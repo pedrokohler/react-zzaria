@@ -17,8 +17,8 @@ const Checkout = () => (
       <Title>Qual o endereço para entrega?</Title>
       <PaperContainer>
         <Grid container spacing={1}>
-          <TextField label='CEP' sm={4} autoFocus />
-          <Grid item sm={8} />
+          <TextField label='CEP' sm={5} autoFocus />
+          <Grid item sm={7} />
           <TextField label='Rua' sm={9} />
           <TextField label='Número' sm={3} />
           <TextField label='Complemento' sm={12} />
@@ -29,7 +29,7 @@ const Checkout = () => (
 
       <Title>Qual o seu telefone?</Title>
       <PaperContainer>
-        <TextField label='Telefone' sm={4} />
+        <TextField label='Telefone' sm={5} />
       </PaperContainer>
     </Grid>
 
