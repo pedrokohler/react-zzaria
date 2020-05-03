@@ -5,7 +5,8 @@ export const PizzaContext = createContext();
 
 const initialState = {
   selectedSize: {},
-  selectedFlavours: []
+  selectedFlavours: [],
+  quantity: 1
 };
 
 function Pizza ({ children, location }) {
@@ -15,10 +16,15 @@ function Pizza ({ children, location }) {
     setPizza((lastPizza) => ({ ...lastPizza, ...location.state }));
   }, [location]);
 
+  const resetPizza = () => {
+    setPizza(initialState);
+  };
+
   return (
     <PizzaContext.Provider value={{
       pizza,
-      setPizza
+      setPizza,
+      resetPizza
     }}
     >
       {children}

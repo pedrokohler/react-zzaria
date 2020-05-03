@@ -15,8 +15,17 @@ const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'))
 const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'));
 
 const Main = () => {
-  const { pizza } = usePizza();
-  const { addPizzaToOrder } = useOrder();
+  const { pizza, resetPizza } = usePizza();
+  const { addPizzaToOrder, order } = useOrder();
+
+  const addPizza = () => {
+    addPizzaToOrder(pizza);
+    resetPizza();
+  };
+
+  console.log('order', order);
+  console.log('pizza', pizza);
+
   return (
     <>
       <Header />
@@ -26,7 +35,11 @@ const Main = () => {
           <Switch>
             <Route path={SIZE_PAGE} exact component={ChoosePizzaSize} />
             <Route path={FLAVOURS_PAGE} component={ChoosePizzaFlavour} />
-            <Route path={QUANTITY_PAGE} component={ChoosePizzaQuantity} />
+            <Route
+              path={QUANTITY_PAGE} render={({ location }) => {
+                return <ChoosePizzaQuantity location={location} handleButtonClick={addPizza} />;
+              }}
+            />
             <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
@@ -58,12 +71,9 @@ const Main = () => {
               location={location}
               history={history}
               forwardButton={{
-                to: {
-                  pathname: CHECKOUT_PAGE,
-                  state: pizza
-                },
+                to: CHECKOUT_PAGE,
                 component: Link,
-                onClick: () => addPizzaToOrder(pizza),
+                onClick: addPizza,
                 children: 'Finalizar compra'
               }}
             />

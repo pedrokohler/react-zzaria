@@ -10,6 +10,7 @@ import {
 import AuthProvider from 'contexts/auth';
 
 import App from 'App';
+import OrderProvider from 'contexts/order';
 
 const theme = createMuiTheme({
   typography: {
@@ -23,11 +24,13 @@ const Root = () => {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
-            <CssBaseline />
-            <GlobalStyle />
-            <BrowserRouter>
-              <Route component={App} />
-            </BrowserRouter>
+            <OrderProvider>
+              <CssBaseline />
+              <GlobalStyle />
+              <BrowserRouter>
+                <Route component={App} />
+              </BrowserRouter>
+            </OrderProvider>
           </AuthProvider>
         </ThemeProvider>
       </MuiThemeProvider>

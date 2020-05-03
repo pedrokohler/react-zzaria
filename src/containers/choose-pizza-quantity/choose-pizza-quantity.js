@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import {
   Input as MaterialInput,
   Button
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { SIZE_PAGE } from 'routes';
 import Title from 'components/title';
 import Header from 'components/content-header';
 import { usePizza } from 'hooks';
 
-const ChoosePizzaQuantity = () => {
+const ChoosePizzaQuantity = ({ handleButtonClick }) => {
   const { pizza, setPizza } = usePizza();
   const [quantity, setQuantity] = useState(1);
 
@@ -35,13 +38,23 @@ const ChoosePizzaQuantity = () => {
 
       <MainContent>
         <Input value={quantity} onChange={handleChange} autoFocus />
-        <Button variant='contained' color='secondary'>
+        <Button
+          variant='contained'
+          color='secondary'
+          component={Link}
+          to={SIZE_PAGE}
+          onClick={handleButtonClick}
+        >
           Adicionar e <br />
           montar outra
         </Button>
       </MainContent>
     </>
   );
+};
+
+ChoosePizzaQuantity.propTypes = {
+  handleButtonClick: PropTypes.func.isRequired
 };
 
 const Input = styled(MaterialInput)`
