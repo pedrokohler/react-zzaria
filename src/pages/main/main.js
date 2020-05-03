@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {
+  Button,
   Container,
   LinearProgress
 } from '@material-ui/core';
@@ -83,10 +84,25 @@ const Main = () => {
             />
           )}
         />
+        <Route
+          path={CHECKOUT_PAGE} render={() => (
+            <Footer>
+              <FooterContent>
+                <Button variant='contained' color='primary'>Confirmar dados</Button>
+              </FooterContent>
+            </Footer>
+          )}
+        />
       </Switch>
     </>
   );
 };
+
+const FooterContent = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+`;
 
 const ContentWrapper = styled.main`
   padding: ${({ theme }) => theme.spacing(12, 2, 2)};
