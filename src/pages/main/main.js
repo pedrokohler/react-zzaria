@@ -7,7 +7,7 @@ import {
   Container,
   LinearProgress
 } from '@material-ui/core';
-import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE } from 'routes';
+import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE, CHECKOUT_CONFIRMATION_PAGE } from 'routes';
 
 import Header from 'containers/header';
 import Footer from 'containers/footer';
@@ -17,6 +17,7 @@ const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
 const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
 const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'));
 const Checkout = lazy(() => import('containers/checkout'));
+const CheckoutConfirmation = lazy(() => import('containers/checkout-confirmation'));
 
 const Main = () => {
   const { pizza, resetPizza } = usePizza();
@@ -40,11 +41,13 @@ const Main = () => {
             <Route path={SIZE_PAGE} exact component={ChoosePizzaSize} />
             <Route path={FLAVOURS_PAGE} component={ChoosePizzaFlavour} />
             <Route
-              path={QUANTITY_PAGE} render={({ location }) => {
+              path={QUANTITY_PAGE}
+              render={({ location }) => {
                 return <ChoosePizzaQuantity location={location} handleButtonClick={addPizza} />;
               }}
             />
-            <Route path={CHECKOUT_PAGE} component={Checkout} />
+            <Route exact path={CHECKOUT_PAGE} component={Checkout} />
+            <Route path={CHECKOUT_CONFIRMATION_PAGE} component={CheckoutConfirmation} />
             <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
@@ -85,10 +88,13 @@ const Main = () => {
           )}
         />
         <Route
+          exact
           path={CHECKOUT_PAGE} render={() => (
             <Footer>
               <FooterContent>
-                <Button variant='contained' color='primary'>Confirmar dados</Button>
+                <Link to={CHECKOUT_CONFIRMATION_PAGE}>
+                  <Button variant='contained' color='primary'>Confirmar dados</Button>
+                </Link>
               </FooterContent>
             </Footer>
           )}
