@@ -18,8 +18,9 @@ const ChoosePizzaQuantity = () => {
     const { value } = e.target;
 
     if (validateNumber(value) || value === '') {
-      setPizza({ ...pizza, quantity: value });
-      setQuantity(value.trim());
+      const numberValue = Number(value);
+      setPizza({ ...pizza, quantity: numberValue });
+      setQuantity(numberValue);
     }
   };
 
