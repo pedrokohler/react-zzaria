@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 export const OrderContext = createContext();
 
 const OrderProvider = ({ children }) => {
-  const [order, setOrder] = useState([]);
+  const [pizzas, setPizza] = useState([]);
 
   const addPizzaToOrder = (pizza) => {
-    setOrder([...order, {
+    setPizza([...pizzas, {
       size: pizza.selectedSize.id,
       flavours: pizza.selectedFlavours.map(f => f.id),
       quantity: pizza.quantity
@@ -16,7 +16,9 @@ const OrderProvider = ({ children }) => {
 
   return (
     <OrderContext.Provider value={{
-      order,
+      order: {
+        pizzas
+      },
       addPizzaToOrder
     }}
     >
