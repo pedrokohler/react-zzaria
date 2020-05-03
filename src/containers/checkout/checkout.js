@@ -48,7 +48,7 @@ const Checkout = () => {
               return (
                 <ListItem key={i}>
                   <Typography>
-                    {quantity} - {singularOrPlural(quantity, 'pizza', 'pizzas')}{' '}
+                    <b>{quantity}</b> - {singularOrPlural(quantity, 'pizza', 'pizzas')}{' '}
                     <b>{name.toUpperCase()}</b> - {' '}
                     ({slices} {singularOrPlural(slices, 'fatia', 'fatias')}, {' '}
                     {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')})
