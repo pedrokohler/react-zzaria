@@ -13,18 +13,16 @@ import { usePizza, useOrder } from 'hooks';
 const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
 const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'));
 const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'));
+const Checkout = lazy(() => import('containers/checkout'));
 
 const Main = () => {
   const { pizza, resetPizza } = usePizza();
-  const { addPizzaToOrder, order } = useOrder();
+  const { addPizzaToOrder } = useOrder();
 
   const addPizza = () => {
     addPizzaToOrder(pizza);
     resetPizza();
   };
-
-  console.log('order', order);
-  console.log('pizza', pizza);
 
   return (
     <>
@@ -40,6 +38,7 @@ const Main = () => {
                 return <ChoosePizzaQuantity location={location} handleButtonClick={addPizza} />;
               }}
             />
+            <Route path={CHECKOUT_PAGE} component={Checkout} />
             <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
