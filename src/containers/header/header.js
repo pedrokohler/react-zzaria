@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   AppBar,
@@ -15,7 +16,7 @@ import { ReactComponent as MainLogo } from 'images/logo-react-zzaria.svg';
 import { useAuth } from 'hooks';
 import { SIZE_PAGE } from 'routes';
 
-const Header = () => {
+const Header = ({ hideMenu, disableLink }) => {
   const { handleLogout, user } = useAuth();
   const [anchorElement, setAnchorElement] = useState(null);
   const firstName = user.firstName;
@@ -28,6 +29,23 @@ const Header = () => {
     setAnchorElement(null);
   }, []);
 
+  const Toolbar = useCallback(styled(MaterialToolbar)`
+    ${hideMenu ? 'display: flex;' : null}
+    ${hideMenu ? 'justify-content: center;' : null}
+    margin: 0 auto;
+    width: 100%;
+    max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
+  `, [hideMenu]);
+
+  const LogoContainer = useCallback(styled.div`
+    ${hideMenu ? null : 'flex-grow: 1;'}
+  `, [hideMenu]);
+
+  const LogoLink = useCallback(styled(Link)`
+    display: inline-block;
+    ${disableLink ? 'pointer-events: none;' : null}
+  `, [disableLink]);
+
   return (
     <AppBar>
       <Toolbar>
@@ -36,30 +54,31 @@ const Header = () => {
             <Logo />
           </LogoLink>
         </LogoContainer>
-        <Typography align='center'>Hey, {firstName}</Typography>
+        {!hideMenu && (
+          <>
+            <Typography align='center'>Hey, {firstName}</Typography>
 
-        <IconButton color='inherit' onClick={handleOpenMenu}>
-          <AccountCircle />
-        </IconButton>
+            <IconButton color='inherit' onClick={handleOpenMenu}>
+              <AccountCircle />
+            </IconButton>
 
-        <Menu open={!!anchorElement} onClose={handleCloseMenu} anchorEl={anchorElement}>
-          <MenuItem onClick={handleLogout}>
-            Sair
-          </MenuItem>
-        </Menu>
+            <Menu open={!!anchorElement} onClose={handleCloseMenu} anchorEl={anchorElement}>
+              <MenuItem onClick={handleLogout}>
+                Sair
+              </MenuItem>
+            </Menu>
+          </>
+        )}
       </Toolbar>
     </AppBar>
 
   );
 };
 
-const LogoContainer = styled.div`
-  flex-grow: 1;
-`;
-
-const LogoLink = styled(Link)`
-  display: inline-block;
-`;
+Header.propTypes = {
+  hideMenu: PropTypes.bool,
+  disableLink: PropTypes.bool
+};
 
 const Logo = styled(MainLogo)`
   width: 200px;
@@ -69,12 +88,6 @@ const Logo = styled(MainLogo)`
   & line{
     stroke: ${({ theme }) => theme.palette.common.white};
   }
-`;
-
-const Toolbar = styled(MaterialToolbar)`
-  margin: 0 auto;
-  width: 100%;
-  max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
 `;
 
 export default Header;

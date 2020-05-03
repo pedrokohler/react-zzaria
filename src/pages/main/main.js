@@ -26,7 +26,10 @@ const Main = () => {
 
   return (
     <>
-      <Header />
+      <Switch>
+        <Route path={CHECKOUT_PAGE} render={() => <Header hideMenu disableLink />} />
+        <Route component={Header} />
+      </Switch>
 
       <Content>
         <Suspense fallback={<LinearProgress />}>
