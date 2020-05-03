@@ -38,16 +38,13 @@ const ChoosePizzaQuantity = ({ handleButtonClick }) => {
 
       <MainContent>
         <Input value={quantity} onChange={handleChange} autoFocus />
-        <Button
-          variant='contained'
-          color='secondary'
-          component={Link}
+        <ButtonAddAnotherPizza
           to={SIZE_PAGE}
           onClick={handleButtonClick}
         >
           Adicionar e <br />
           montar outra
-        </Button>
+        </ButtonAddAnotherPizza>
       </MainContent>
     </>
   );
@@ -56,6 +53,14 @@ const ChoosePizzaQuantity = ({ handleButtonClick }) => {
 ChoosePizzaQuantity.propTypes = {
   handleButtonClick: PropTypes.func.isRequired
 };
+
+const ButtonAddAnotherPizza = styled(Button).attrs({
+  variant: 'contained',
+  color: 'secondary',
+  component: Link
+})`
+  text-align: center;
+`;
 
 const Input = styled(MaterialInput)`
   margin-bottom: ${({ theme }) => theme.spacing(3)}px;
