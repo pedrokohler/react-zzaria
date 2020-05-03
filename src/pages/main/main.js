@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {
+  Container,
   LinearProgress
 } from '@material-ui/core';
 import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE } from 'routes';
@@ -86,9 +88,21 @@ const Main = () => {
   );
 };
 
-const Content = styled.main`
+const ContentWrapper = styled.main`
   padding: ${({ theme }) => theme.spacing(12, 2, 2)};
   flex-grow: 1;
 `;
+
+const Content = ({ children, ...props }) => (
+  <ContentWrapper {...props}>
+    <Container>
+      {children}
+    </Container>
+  </ContentWrapper>
+);
+
+Content.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Main;
