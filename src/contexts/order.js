@@ -8,8 +8,8 @@ const OrderProvider = ({ children }) => {
 
   const addPizzaToOrder = (pizza) => {
     setPizza([...pizzas, {
-      size: pizza.selectedSize.id,
-      flavours: pizza.selectedFlavours.map(f => f.id),
+      size: pizza.selectedSize,
+      flavours: pizza.selectedFlavours,
       quantity: pizza.quantity
     }]);
   };
