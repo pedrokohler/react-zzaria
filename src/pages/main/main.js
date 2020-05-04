@@ -7,7 +7,14 @@ import {
   Container,
   LinearProgress
 } from '@material-ui/core';
-import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE, CHECKOUT_CONFIRMATION_PAGE } from 'routes';
+import {
+  SIZE_PAGE,
+  FLAVOURS_PAGE,
+  QUANTITY_PAGE,
+  CHECKOUT_PAGE,
+  CHECKOUT_CONFIRMATION_PAGE,
+  CHECKOUT_SUCCESS_PAGE
+} from 'routes';
 
 import Header from 'containers/header';
 import Footer from 'containers/footer';
@@ -19,6 +26,7 @@ const ChoosePizzaFlavour = lazy(() => import('containers/choose-pizza-flavour'))
 const ChoosePizzaQuantity = lazy(() => import('containers/choose-pizza-quantity'));
 const Checkout = lazy(() => import('containers/checkout'));
 const CheckoutConfirmation = lazy(() => import('containers/checkout-confirmation'));
+const CheckoutSuccess = lazy(() => import('containers/checkout-success'));
 
 const Main = () => {
   const { pizza, resetPizza } = usePizza();
@@ -49,6 +57,7 @@ const Main = () => {
             />
             <Route exact path={CHECKOUT_PAGE} component={Checkout} />
             <Route path={CHECKOUT_CONFIRMATION_PAGE} component={CheckoutConfirmation} />
+            <Route path={CHECKOUT_SUCCESS_PAGE} component={CheckoutSuccess} />
             <Redirect to={SIZE_PAGE} />
           </Switch>
         </Suspense>
@@ -102,8 +111,20 @@ const Main = () => {
           exact
           path={CHECKOUT_CONFIRMATION_PAGE} render={() => (
             <FooterCheckout justifyContent='center'>
-              <ButtonLink to='' size='large'>
-                <Button variant='contained' color='primary'>Tudo certo!</Button>
+              <ButtonLink to={CHECKOUT_SUCCESS_PAGE}>
+                <Button variant='contained' color='primary' size='large'>Tudo certo!</Button>
+              </ButtonLink>
+            </FooterCheckout>
+          )}
+        />
+        <Route
+          exact
+          path={CHECKOUT_SUCCESS_PAGE} render={() => (
+            <FooterCheckout justifyContent='center'>
+              <ButtonLink to={SIZE_PAGE}>
+                <Button size='large' color='secondary'>
+                  {' < '} Voltar para a página inicial
+                </Button>
               </ButtonLink>
             </FooterCheckout>
           )}
