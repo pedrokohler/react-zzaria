@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
   IconButton,
@@ -12,7 +13,7 @@ import { Close } from '@material-ui/icons';
 import { useOrder } from 'hooks';
 import { singularOrPlural } from 'utils';
 
-const OrderInfo = () => {
+const OrderInfo = ({ showRemoveButton }) => {
   const { order } = useOrder();
   return (
     <List>
@@ -34,14 +35,20 @@ const OrderInfo = () => {
                 .replace(/, (.[^,]*)$/, ' e $1')}
               </b>
             </Typography>
-            <IconButton title='Remover' color='secondary'>
-              <Close />
-            </IconButton>
+            {showRemoveButton && (
+              <IconButton title='Remover' color='secondary'>
+                <Close />
+              </IconButton>
+            )}
           </ListItem>
         );
       })}
     </List>
   );
+};
+
+OrderInfo.propTypes = {
+  showRemoveButton: PropTypes.bool
 };
 
 const ListItem = styled(MaterialListItem)`

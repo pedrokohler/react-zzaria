@@ -36,7 +36,7 @@ const Checkout = () => {
       <Grid container direction='column' item xs={12} md={6}>
         <Title>Informações do seu pedido</Title>
         <PaperContainer>
-          <OrderInfo />
+          <OrderInfo showRemoveButton />
         </PaperContainer>
       </Grid>
     </Grid>
