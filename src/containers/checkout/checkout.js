@@ -3,19 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
   Grid,
-  List,
-  ListItem,
   Paper,
-  TextField as MaterialTextField,
-  Typography
+  TextField as MaterialTextField
 } from '@material-ui/core';
 
-import { useOrder } from 'hooks';
 import MyTitle from 'components/title';
-import { singularOrPlural } from 'utils';
+import OrderInfo from 'components/order-info';
 
 const Checkout = () => {
-  const { order } = useOrder();
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
@@ -41,29 +36,7 @@ const Checkout = () => {
       <Grid container direction='column' item xs={12} md={6}>
         <Title>Informações do seu pedido</Title>
         <PaperContainer>
-          <List>
-            {order.pizzas.map((pizza, i) => {
-              const { size, flavours: selectedFlavours, quantity } = pizza;
-              const { name, slices, flavours } = size;
-              return (
-                <ListItem key={i}>
-                  <Typography>
-                    <b>{quantity}</b> - {singularOrPlural(quantity, 'pizza', 'pizzas')}{' '}
-                    <b>{name.toUpperCase()}</b> - {' '}
-                    ({slices} {singularOrPlural(slices, 'fatia', 'fatias')}, {' '}
-                    {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')})
-                    <br />
-                    {singularOrPlural(selectedFlavours.length, 'No sabor', 'Nos sabores')}{' '}
-                    <b>{selectedFlavours
-                      .map(({ name }) => name)
-                      .join(', ')
-                      .replace(/, (.[^,]*)$/, ' e $1')}
-                    </b>
-                  </Typography>
-                </ListItem>
-              );
-            })}
-          </List>
+          <OrderInfo />
         </PaperContainer>
       </Grid>
     </Grid>

@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
+  Container,
   Paper,
   Typography
 } from '@material-ui/core';
 
 import Title from 'components/title';
 import { useAuth } from 'hooks';
+import OrderInfo from 'components/order-info';
 
 const CheckoutConfirmation = () => {
   const { user } = useAuth();
@@ -16,9 +18,11 @@ const CheckoutConfirmation = () => {
         <Title variant='h4'>Oi, {user.firstName}</Title>
         <Typography>Confere, por favor, se está tudo certo com o seu pedido antes de finalizar?</Typography>
       </Header>
-      <PaperContainer>
-        Conteúdo
-      </PaperContainer>
+      <Container>
+        <PaperContainer>
+          <OrderInfo />
+        </PaperContainer>
+      </Container>
     </>
 
   );
