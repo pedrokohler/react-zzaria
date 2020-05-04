@@ -11,6 +11,7 @@ import { SIZE_PAGE, FLAVOURS_PAGE, QUANTITY_PAGE, CHECKOUT_PAGE, CHECKOUT_CONFIR
 
 import Header from 'containers/header';
 import Footer from 'containers/footer';
+import FooterCheckout from 'containers/footer/footer-checkout';
 import { usePizza, useOrder } from 'hooks';
 
 const ChoosePizzaSize = lazy(() => import('containers/choose-pizza-size'));
@@ -90,13 +91,21 @@ const Main = () => {
         <Route
           exact
           path={CHECKOUT_PAGE} render={() => (
-            <Footer>
-              <FooterContent>
-                <ButtonLink to={CHECKOUT_CONFIRMATION_PAGE}>
-                  <Button variant='contained' color='primary'>Confirmar dados</Button>
-                </ButtonLink>
-              </FooterContent>
-            </Footer>
+            <FooterCheckout>
+              <ButtonLink to={CHECKOUT_CONFIRMATION_PAGE}>
+                <Button variant='contained' color='primary'>Confirmar dados</Button>
+              </ButtonLink>
+            </FooterCheckout>
+          )}
+        />
+        <Route
+          exact
+          path={CHECKOUT_CONFIRMATION_PAGE} render={() => (
+            <FooterCheckout justifyContent='center'>
+              <ButtonLink to='' size='large'>
+                <Button variant='contained' color='primary'>Tudo certo!</Button>
+              </ButtonLink>
+            </FooterCheckout>
           )}
         />
       </Switch>
@@ -107,12 +116,6 @@ const Main = () => {
 const ButtonLink = styled(Link)`
     text-decoration: inherit;
     color: inherit;
-`;
-
-const FooterContent = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  flex-grow: 1;
 `;
 
 const ContentWrapper = styled.main`
