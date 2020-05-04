@@ -18,7 +18,7 @@ const OrderInfo = () => {
         return (
           <ListItem key={i}>
             <Typography>
-              <b>{quantity}</b> - {singularOrPlural(quantity, 'pizza', 'pizzas')}{' '}
+              <b>{quantity}</b> {singularOrPlural(quantity, 'pizza', 'pizzas')}{' '}
               <b>{name.toUpperCase()}</b> - {' '}
               ({slices} {singularOrPlural(slices, 'fatia', 'fatias')}, {' '}
               {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')})
