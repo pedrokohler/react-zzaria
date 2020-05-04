@@ -5,13 +5,24 @@ export const OrderContext = createContext();
 
 const OrderProvider = ({ children }) => {
   const [pizzas, setPizza] = useState([]);
+  const [isNewOrder, setIsNewOrder] = useState(true);
 
   const addPizzaToOrder = (pizza) => {
-    setPizza([...pizzas, {
+    const newPizza = {
       size: pizza.selectedSize,
       flavours: pizza.selectedFlavours,
       quantity: pizza.quantity
-    }]);
+    };
+
+    if (isNewOrder) {
+      setPizza([newPizza]);
+      return setIsNewOrder(false);
+    }
+    setPizza([...pizzas, newPizza]);
+  };
+
+  const sendOrder = () => {
+    setIsNewOrder(true);
   };
 
   return (
@@ -19,7 +30,8 @@ const OrderProvider = ({ children }) => {
       order: {
         pizzas
       },
-      addPizzaToOrder
+      addPizzaToOrder,
+      sendOrder
     }}
     >
       {children}

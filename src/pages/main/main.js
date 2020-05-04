@@ -30,7 +30,7 @@ const CheckoutSuccess = lazy(() => import('containers/checkout-success'));
 
 const Main = () => {
   const { pizza, resetPizza } = usePizza();
-  const { addPizzaToOrder } = useOrder();
+  const { addPizzaToOrder, sendOrder } = useOrder();
 
   const addPizza = () => {
     addPizzaToOrder(pizza);
@@ -112,7 +112,14 @@ const Main = () => {
           path={CHECKOUT_CONFIRMATION_PAGE} render={() => (
             <FooterCheckout justifyContent='center'>
               <ButtonLink to={CHECKOUT_SUCCESS_PAGE}>
-                <Button variant='contained' color='primary' size='large'>Tudo certo!</Button>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  size='large'
+                  onClick={sendOrder}
+                >
+                  Tudo certo!
+                </Button>
               </ButtonLink>
             </FooterCheckout>
           )}
