@@ -92,9 +92,9 @@ const Main = () => {
           path={CHECKOUT_PAGE} render={() => (
             <Footer>
               <FooterContent>
-                <Link to={CHECKOUT_CONFIRMATION_PAGE}>
+                <ButtonLink to={CHECKOUT_CONFIRMATION_PAGE}>
                   <Button variant='contained' color='primary'>Confirmar dados</Button>
-                </Link>
+                </ButtonLink>
               </FooterContent>
             </Footer>
           )}
@@ -103,6 +103,11 @@ const Main = () => {
     </>
   );
 };
+
+const ButtonLink = styled(Link)`
+    text-decoration: inherit;
+    color: inherit;
+`;
 
 const FooterContent = styled.div`
   display: flex;
