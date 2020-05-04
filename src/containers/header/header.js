@@ -29,28 +29,11 @@ const Header = ({ hideMenu, disableLink }) => {
     setAnchorElement(null);
   }, []);
 
-  const Toolbar = useCallback(styled(MaterialToolbar)`
-    ${hideMenu ? 'display: flex;' : null}
-    ${hideMenu ? 'justify-content: center;' : null}
-    margin: 0 auto;
-    width: 100%;
-    max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
-  `, [hideMenu]);
-
-  const LogoContainer = useCallback(styled.div`
-    ${hideMenu ? null : 'flex-grow: 1;'}
-  `, [hideMenu]);
-
-  const LogoLink = useCallback(styled(Link)`
-    display: inline-block;
-    ${disableLink ? 'pointer-events: none;' : null}
-  `, [disableLink]);
-
   return (
     <AppBar>
-      <Toolbar>
-        <LogoContainer>
-          <LogoLink to={SIZE_PAGE}>
+      <Toolbar hideMenu={hideMenu}>
+        <LogoContainer hideMenu={hideMenu}>
+          <LogoLink to={SIZE_PAGE} disableLink={disableLink}>
             <Logo />
           </LogoLink>
         </LogoContainer>
@@ -79,6 +62,23 @@ Header.propTypes = {
   hideMenu: PropTypes.bool,
   disableLink: PropTypes.bool
 };
+
+const Toolbar = styled(MaterialToolbar)`
+  display: ${({ hideMenu }) => hideMenu ? 'flex' : null};
+  justify-content: ${({ hideMenu }) => hideMenu ? 'center' : null};
+  margin: 0 auto;
+  width: 100%;
+  max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
+`;
+
+const LogoContainer = styled.div`
+  flex-grow: ${({ hideMenu }) => hideMenu ? null : '1'};
+`;
+
+const LogoLink = styled(Link)`
+  display: inline-block;
+  pointer-events: ${({ disableLink }) => disableLink ? 'none' : null};
+`;
 
 const Logo = styled(MainLogo)`
   width: 200px;
