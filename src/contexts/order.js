@@ -1,24 +1,30 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 
 export const OrderContext = createContext();
 
 const OrderProvider = ({ children }) => {
-  const [pizzas, setPizza] = useState([]);
+  const [pizzas, setPizzas] = useState([]);
   const [isNewOrder, setIsNewOrder] = useState(true);
 
   const addPizzaToOrder = (pizza) => {
     const newPizza = {
+      id: v4(),
       size: pizza.selectedSize,
       flavours: pizza.selectedFlavours,
       quantity: pizza.quantity
     };
 
     if (isNewOrder) {
-      setPizza([newPizza]);
+      setPizzas([newPizza]);
       return setIsNewOrder(false);
     }
-    setPizza([...pizzas, newPizza]);
+    setPizzas([...pizzas, newPizza]);
+  };
+
+  const removePizzaFromOrder = (id) => {
+    setPizzas((pizzas) => pizzas.filter(pizza => pizza.id !== id));
   };
 
   const sendOrder = () => {
@@ -31,6 +37,7 @@ const OrderProvider = ({ children }) => {
         pizzas
       },
       addPizzaToOrder,
+      removePizzaFromOrder,
       sendOrder
     }}
     >
