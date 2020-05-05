@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
   Grid,
-  Paper,
-  TextField as MaterialTextField
+  Paper
 } from '@material-ui/core';
 
+import FormAddress from './form-address';
+import TextField from './text-field';
 import MyTitle from 'components/title';
 import OrderInfo from 'components/order-info';
 
@@ -16,15 +16,7 @@ const Checkout = () => {
       <Grid item xs={12} md={6}>
         <Title>Qual o endereço para entrega?</Title>
         <AddressPaperContainer>
-          <Grid container spacing={1}>
-            <TextField label='CEP' sm={5} autoFocus />
-            <Grid item sm={7} />
-            <TextField label='Rua' sm={9} />
-            <TextField label='Número' sm={3} />
-            <TextField label='Complemento' sm={12} />
-            <TextField label='Cidade' sm={9} />
-            <TextField label='Estado' sm={3} />
-          </Grid>
+          <FormAddress />
         </AddressPaperContainer>
 
         <Title>Qual o seu telefone?</Title>
@@ -41,23 +33,6 @@ const Checkout = () => {
       </Grid>
     </Grid>
   );
-};
-
-const TextField = ({ sm, xs, autoFocus, ...props }) => (
-  <Grid item xs={12} sm={sm}>
-    <MaterialTextField
-      fullWidth
-      variant='outlined'
-      inputProps={{ autoFocus }}
-      {...props}
-    />
-  </Grid>
-);
-
-TextField.propTypes = {
-  autoFocus: PropTypes.bool,
-  xs: PropTypes.number,
-  sm: PropTypes.number
 };
 
 const Title = styled(MyTitle).attrs({
