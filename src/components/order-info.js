@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   IconButton,
@@ -12,12 +13,19 @@ import { Close } from '@material-ui/icons';
 
 import { useOrder } from 'hooks';
 import { singularOrPlural } from 'utils';
+import { SIZE_PAGE } from 'routes';
 
 const OrderInfo = ({ showRemoveButton }) => {
   const { order, removePizzaFromOrder } = useOrder();
+  const { pizzas } = order;
+
+  if (!pizzas.length) {
+    return <Redirect to={SIZE_PAGE} />;
+  }
+
   return (
     <List>
-      {order.pizzas.map((pizza) => {
+      {pizzas.map((pizza) => {
         const { id, size, flavours: selectedFlavours, quantity } = pizza;
         const { name, slices, flavours } = size;
         return (
