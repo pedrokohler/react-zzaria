@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 
 import FormAddress from './form-address';
-import TextField from './text-field';
+import PhoneField from './phone-field';
 import MyTitle from 'components/title';
 import OrderInfo from 'components/order-info';
 
@@ -21,7 +21,7 @@ const Checkout = () => {
 
         <Title>Qual o seu telefone?</Title>
         <PaperContainer>
-          <TextField label='Telefone' sm={5} />
+          <PhoneField />
         </PaperContainer>
       </Grid>
 
