@@ -12,8 +12,6 @@ const LoginPage = lazy(() => import('pages/login'));
 
 const App = ({ location }) => {
   const { user, checkedAuthState } = useAuth();
-  const message = user ? 'Usuário está logado' : 'Usuário não está logado';
-  console.log(message, user);
 
   if (!checkedAuthState) {
     return <LinearProgress />;
