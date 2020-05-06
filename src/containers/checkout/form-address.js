@@ -24,11 +24,20 @@ const FormAddress = () => {
       }
 
       setFetchingCep(true);
+      try {
       const response = await fetch(`https://ws.apicep.com/cep/${cep}.json`);
       const data = await response.json();
+        if (data.ok) {
       setFetchingCep(false);
       numberField.current.focus();
       dispatch({ type: 'SET_FULL_ADDRESS', payload: data });
+        } else {
+          dispatch({ type: 'FAIL', payload: { error: data.message } });
+        }
+      } catch (error) {
+        dispatch({ type: 'FAIL', payload: { error: error.message } });
+      }
+      setFetchingCep(false);
     };
 
     fetchAddress(cep);
@@ -72,6 +81,8 @@ const FormAddress = () => {
     }
   ];
 
+  const error = addressState.error;
+
   return (
     <Grid container spacing={1} alignItems='center'>
       <TextField
@@ -80,9 +91,12 @@ const FormAddress = () => {
         autoFocus
         value={cep}
         onChange={handleChangeCep}
-
+        error={!!error}
       />
-      <Grid item sm={7}>{fetchingCep && <CircularProgress size={20} />}</Grid>
+      <Grid item sm={7}>
+        {(fetchingCep && <CircularProgress size={20} />) ||
+        (error && <Typography color='secondary'>{error}</Typography>)}
+      </Grid>
 
       {fields.map(field =>
         <TextField
@@ -101,7 +115,8 @@ const reducer = (state, action) => {
   if (action.type === 'SET_FULL_ADDRESS') {
     return {
       ...state,
-      ...action.payload
+      ...action.payload,
+      error: null
     };
   }
 
@@ -112,6 +127,12 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'FAIL') {
+    return {
+      ...initialState,
+      error: action.payload.error
+    };
+  }
   return state;
 };
 
