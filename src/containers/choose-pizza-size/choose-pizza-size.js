@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Card,
@@ -8,17 +8,37 @@ import {
 
 import { FLAVOURS_PAGE } from 'routes';
 import singularOrPlural from 'utils/singularOrPlural';
-import pizzaSizes from 'mocks/pizza-sizes';
 import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
 import CardLink from 'components/card-link';
 import { useAuth } from 'hooks';
+import { db } from 'services/firebase';
 
 const ChoosePizzaSize = () => {
   const { user } = useAuth();
+  const [pizzaSizes, setPizzaSizes] = useState([]);
   const firstName = user.firstName;
+
+  useEffect(() => {
+    let mounted = true;
+
+    db.collection('pizzaSizes').get().then(snapshot => {
+      const sizes = [];
+      snapshot.forEach(doc => {
+        sizes.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      if (mounted) setPizzaSizes(sizes);
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <>
