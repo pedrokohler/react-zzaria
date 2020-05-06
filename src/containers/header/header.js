@@ -63,7 +63,9 @@ Header.propTypes = {
   disableLink: PropTypes.bool
 };
 
-const Toolbar = styled(MaterialToolbar)`
+const Toolbar = styled(MaterialToolbar).withConfig({
+  shouldForwardProp: prop => prop !== 'hideMenu'
+})`
   display: ${({ hideMenu }) => hideMenu ? 'flex' : null};
   justify-content: ${({ hideMenu }) => hideMenu ? 'center' : null};
   margin: 0 auto;
@@ -71,11 +73,15 @@ const Toolbar = styled(MaterialToolbar)`
   max-width: ${({ theme }) => theme.breakpoints.values.lg}px;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.div.withConfig({
+  shouldForwardProp: prop => prop !== 'hideMenu'
+})`
   flex-grow: ${({ hideMenu }) => hideMenu ? null : '1'};
 `;
 
-const LogoLink = styled(Link)`
+const LogoLink = styled(Link).withConfig({
+  shouldForwardProp: prop => prop !== 'disableLink'
+})`
   display: inline-block;
   pointer-events: ${({ disableLink }) => disableLink ? 'none' : null};
 `;
