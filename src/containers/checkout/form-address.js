@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, useReducer, useRef } from 'react';
 import {
   Grid,
-  CircularProgress
+  CircularProgress,
+  Typography
 } from '@material-ui/core';
 
 import TextField from './text-field';
+import { useOrder } from 'hooks';
 
 const cepMask = (value) => value
   .replace(/\D+/g, '')
@@ -16,6 +18,9 @@ const FormAddress = () => {
   const [addressState, dispatch] = useReducer(reducer, initialState);
   const [fetchingCep, setFetchingCep] = useState(false);
   const numberField = useRef();
+  const { setAddress } = useOrder();
+
+  useEffect(() => setAddress(addressState), [addressState, setAddress]);
 
   useEffect(() => {
     const fetchAddress = async (cep) => {
@@ -25,12 +30,12 @@ const FormAddress = () => {
 
       setFetchingCep(true);
       try {
-      const response = await fetch(`https://ws.apicep.com/cep/${cep}.json`);
-      const data = await response.json();
+        const response = await fetch(`https://ws.apicep.com/cep/${cep}.json`);
+        const data = await response.json();
         if (data.ok) {
-      setFetchingCep(false);
-      numberField.current.focus();
-      dispatch({ type: 'SET_FULL_ADDRESS', payload: data });
+          setFetchingCep(false);
+          numberField.current.focus();
+          dispatch({ type: 'SET_FULL_ADDRESS', payload: data });
         } else {
           dispatch({ type: 'FAIL', payload: { error: data.message } });
         }
@@ -133,6 +138,7 @@ const reducer = (state, action) => {
       error: action.payload.error
     };
   }
+
   return state;
 };
 
