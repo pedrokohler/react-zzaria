@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   Card,
@@ -13,33 +13,13 @@ import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
 import CardLink from 'components/card-link';
-import { useAuth } from 'hooks';
-import { db } from 'services/firebase';
+import { useAuth, useCollection } from 'hooks';
 
 const ChoosePizzaSize = () => {
   const { user } = useAuth();
-  const [pizzaSizes, setPizzaSizes] = useState([]);
+  const pizzaSizes = useCollection('pizzaSizes');
+
   const firstName = user.firstName;
-
-  useEffect(() => {
-    let mounted = true;
-
-    db.collection('pizzaSizes').get().then(snapshot => {
-      const sizes = [];
-      snapshot.forEach(doc => {
-        sizes.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-      if (mounted) setPizzaSizes(sizes);
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   return (
     <>
       <Header>

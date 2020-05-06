@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -16,32 +16,12 @@ import Divider from 'components/divider';
 import { singularOrPlural, toMoney } from 'utils';
 import CardLink from 'components/card-link';
 
-import { usePizza } from 'hooks';
-import { db } from 'services/firebase';
+import { usePizza, useCollection } from 'hooks';
 
 const ChoosePizzaFlavour = ({ location }) => {
   const [checkboxes, setCheckboxes] = useState({});
   const { pizza, setPizza } = usePizza();
-  const [pizzaFlavours, setPizzaFlavours] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    db.collection('pizzaFlavours').get().then(snapshot => {
-      const flavours = [];
-      snapshot.forEach(doc =>
-        flavours.push({
-          id: doc.id,
-          ...doc.data()
-        })
-      );
-      if (mounted) setPizzaFlavours(flavours);
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const pizzaFlavours = useCollection('pizzaFlavours');
 
   if (!location.state) {
     return <Redirect to={SIZE_PAGE} />;
