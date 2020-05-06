@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import {
   Card as MaterialCard,
   Grid,
-  Typography
+  Typography,
+  LinearProgress
 } from '@material-ui/core';
 
-import { SIZE_PAGE } from 'routes';
 import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
-import { singularOrPlural, toMoney } from 'utils';
 import CardLink from 'components/card-link';
+import ErrorSnackbar from 'components/error-snackbar';
 
+import { singularOrPlural, toMoney } from 'utils';
 import { usePizza, useCollection } from 'hooks';
 
 const ChoosePizzaFlavour = ({ location }) => {
@@ -23,8 +23,12 @@ const ChoosePizzaFlavour = ({ location }) => {
   const { pizza, setPizza } = usePizza();
   const pizzaFlavours = useCollection('pizzaFlavours');
 
-  if (!location.state) {
-    return <Redirect to={SIZE_PAGE} />;
+  if (!pizzaFlavours) {
+    return <LinearProgress />;
+  }
+
+  if (pizzaFlavours.length === 0) {
+    return <ErrorSnackbar />;
   }
 
   const { flavours, id: sizeId } = location.state.selectedSize;

@@ -3,21 +3,33 @@ import styled from 'styled-components';
 import {
   Card,
   Grid,
-  Typography
+  Typography,
+  LinearProgress
 } from '@material-ui/core';
 
 import { FLAVOURS_PAGE } from 'routes';
 import singularOrPlural from 'utils/singularOrPlural';
+
 import Title from 'components/title';
 import Header from 'components/content-header';
 import PizzasGrid from 'components/pizzas-grid';
 import Divider from 'components/divider';
 import CardLink from 'components/card-link';
+import ErrorSnackbar from 'components/error-snackbar';
+
 import { useAuth, useCollection } from 'hooks';
 
 const ChoosePizzaSize = () => {
   const { user } = useAuth();
   const pizzaSizes = useCollection('pizzaSizes');
+
+  if (!pizzaSizes) {
+    return <LinearProgress />;
+  }
+
+  if (pizzaSizes.length === 0) {
+    return <ErrorSnackbar />;
+  }
 
   const firstName = user.firstName;
   return (
