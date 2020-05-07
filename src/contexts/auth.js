@@ -11,7 +11,8 @@ function Auth ({ children }) {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        const firstName = user.displayName.split(' ')[0];
+        const { displayName } = user;
+        const firstName = typeof displayName === 'string' ? displayName.split(' ')[0] : 'Anônimo';
         setUser({ ...user, firstName });
       } else {
         setUser(null);
