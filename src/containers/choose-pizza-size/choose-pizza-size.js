@@ -43,7 +43,7 @@ const ChoosePizzaSize = () => {
         </Title>
       </Header>
       <PizzasGrid>
-        {pizzaSizes.map((size) => (
+        {pizzaSizes.sort((a, b) => a.size - b.size).map((size) => (
           <Grid item key={size.id} xs>
             <Card>
               <CardLink to={{

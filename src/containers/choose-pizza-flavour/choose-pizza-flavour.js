@@ -70,7 +70,7 @@ const ChoosePizzaFlavour = ({ location }) => {
         </Title>
       </Header>
       <PizzasGrid>
-        {pizzaFlavours.map(flavour => (
+        {pizzaFlavours.sort((a, b) => a.value[sizeId] - b.value[sizeId]).map(flavour => (
           <Grid item key={flavour.id} xs>
             <Card checked={!!checkboxes[flavour.id]}>
               <Label>
