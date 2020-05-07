@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
 import firebase, { db } from 'services/firebase';
@@ -13,7 +13,7 @@ const OrderProvider = ({ children }) => {
   const [address, setAddress] = useState({});
   const { user } = useAuth();
 
-  const addPizzaToOrder = (pizza) => {
+  const addPizzaToOrder = useCallback((pizza) => {
     const newPizza = {
       id: v4(),
       size: pizza.selectedSize,
@@ -26,13 +26,13 @@ const OrderProvider = ({ children }) => {
       return setIsNewOrder(false);
     }
     setPizzas([...pizzas, newPizza]);
-  };
+  }, [isNewOrder, pizzas]);
 
-  const removePizzaFromOrder = (id) => {
+  const removePizzaFromOrder = useCallback((id) => {
     setPizzas((pizzas) => pizzas.filter(pizza => pizza.id !== id));
-  };
+  }, []);
 
-  const sendOrder = async () => {
+  const sendOrder = useCallback(async () => {
     try {
       const order = {
         userId: user.uid,
@@ -50,7 +50,7 @@ const OrderProvider = ({ children }) => {
     } catch (e) {
       console.log('Erro ao salvar pedido', e.message);
     }
-  };
+  }, [address, phone, pizzas, user]);
 
   return (
     <OrderContext.Provider value={{

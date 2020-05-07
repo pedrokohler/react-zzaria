@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 export const PizzaContext = createContext();
@@ -16,9 +16,9 @@ function Pizza ({ children, location }) {
     setPizza((lastPizza) => ({ ...lastPizza, ...location.state }));
   }, [location]);
 
-  const resetPizza = () => {
+  const resetPizza = useCallback(() => {
     setPizza(initialState);
-  };
+  }, []);
 
   return (
     <PizzaContext.Provider value={{
