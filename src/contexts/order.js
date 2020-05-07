@@ -1,6 +1,8 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
+import firebase, { db } from 'services/firebase';
+import { useAuth } from 'hooks';
 
 export const OrderContext = createContext();
 
@@ -9,6 +11,7 @@ const OrderProvider = ({ children }) => {
   const [isNewOrder, setIsNewOrder] = useState(true);
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({});
+  const { user } = useAuth();
 
   const addPizzaToOrder = (pizza) => {
     const newPizza = {
@@ -29,8 +32,24 @@ const OrderProvider = ({ children }) => {
     setPizzas((pizzas) => pizzas.filter(pizza => pizza.id !== id));
   };
 
-  const sendOrder = () => {
-    setIsNewOrder(true);
+  const sendOrder = async () => {
+    try {
+      const order = {
+        userId: user.uid,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        address,
+        phone,
+        pizzas: pizzas.map(pizza => ({
+          size: pizza.size,
+          flavours: pizza.flavours,
+          quantity: pizza.quantity
+        }))
+      };
+      await db.collection('orders').add(order);
+      setIsNewOrder(true);
+    } catch (e) {
+      console.log('Erro ao salvar pedido', e.message);
+    }
   };
 
   return (
