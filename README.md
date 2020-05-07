@@ -1,3 +1,7 @@
+## Live Version
+
+See the [live version](https://react-zzaria-pedro-kohler.netlify.app/)
+
 ## Setup
 
 Create a project in Firebase Console. Enable Firestore and Github login.
