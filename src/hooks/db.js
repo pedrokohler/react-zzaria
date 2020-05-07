@@ -16,6 +16,8 @@ const useCollection = (collection) => {
         })
       );
       if (mounted) setData(docs);
+    }).catch(() => {
+      setData([]);
     });
 
     return () => {
