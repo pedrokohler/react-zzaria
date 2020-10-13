@@ -4,25 +4,18 @@ import { db } from 'services/firebase';
 const useCollection = (collection) => {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    let mounted = true;
-
-    db.collection(collection).get().then(snapshot => {
-      const docs = [];
-      snapshot.forEach(doc =>
-        docs.push({
+  const loadDocs = (collection) => {
+    return db.collection(collection).get().then(snapshot => {
+      return snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
-        })
-      );
-      if (mounted) setData(docs);
-    }).catch(() => {
-      setData([]);
-    });
+      }));
+    })
+    .catch(() => []);
+  }
 
-    return () => {
-      mounted = false;
-    };
+  useEffect(() => {
+      loadDocs(collection).then(setData);
   }, [collection]);
 
   return data;
